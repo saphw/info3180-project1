@@ -1,3 +1,23 @@
-body {
-    padding-top: 5rem;
+*{
+    box-sizing: border-box;
+    padding-top: 0px;
+    margin:0px
+}
+
+.navbar{ 
+    background-color: rgb(68, 173, 151);
+}
+
+.nav_link{
+    text-decoration: none;
+    color: white;
+    padding: .5rem;
+}
+.navbar_brand{
+    text-decoration: none;
+    color: white;
+    padding: .5rem;
+}
+.nav_logo{
+    padding: .5rem;
 }

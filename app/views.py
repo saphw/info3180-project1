@@ -24,6 +24,23 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/properties/create')
+def newProperty():
+    """Render the website's create new properties form."""
+    return render_template('properties_create.html')
+
+@app.route('/properties')
+def propertyList():
+    """Render the website's properties page."""
+    return render_template('properties.html')
+
+
+"""
+@app.route('/properties/<propertyid>')
+def propertyView():
+    #Render the website's property page.
+    return render_template('property.html', id=id)
+"""
 
 ###
 # The functions below should be applicable to all Flask apps.
