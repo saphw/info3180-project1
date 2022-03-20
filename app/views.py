@@ -7,6 +7,10 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for
+from app.forms import UploadForm
+import os
+from werkzeug.utils import secure_filename
+from app.models import propertyData
 
 
 ###
@@ -24,23 +28,45 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
-@app.route('/properties/create')
-def newProperty():
-    """Render the website's create new properties form."""
-    return render_template('properties_create.html')
 
 @app.route('/properties')
 def propertyList():
     """Render the website's properties page."""
-    return render_template('properties.html')
+    properties= db.session.query(Property).all()
+    return render_template('properties.html',properties=properties)
+#return render_template('properties.html')
 
 
-"""
-@app.route('/properties/<propertyid>')
+@app.route('/properties/<int:propertyid>')
 def propertyView():
     #Render the website's property page.
-    return render_template('property.html', id=id)
-"""
+    property = db.session.query(Property).get(propertyid)
+    return render_template('property.html', property=property)
+
+#Render the website's create new properties form.
+@app.route('/properties/create', methods=['GET','POST'])
+def newProperty():
+    property= UploadForm()
+    if request.method== 'POST' and property.validated():
+       file= property.dp.data
+       filename= secure_filename(file.filename)
+       file.save(os.path.join(path, filename))
+
+       newProp = propertyData(
+            request.form['title'],
+            request.form['bedrooms'],
+            request.form['bathrooms'],
+            request.form['location'],
+            request.form['price']
+           
+       )
+
+       db.session.add(newProp)
+       db.session.commit()
+
+       flash("Propert Added", 'sucess')
+       return redirect(url_for('propertes'))
+    return render_template("properties_create.html", form=property)
 
 ###
 # The functions below should be applicable to all Flask apps.
