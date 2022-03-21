@@ -7,15 +7,15 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 class UploadForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     bedrooms = IntegerField('Bedrooms', validators=[DataRequired()])
-    bathrooms =  IntegerField('Bathrooms', validators=[DataRequired()])
+    bathrooms = IntegerField('Bathrooms', validators=[DataRequired()])
 
     location = StringField('Location', validators=[DataRequired()])
-    price = IntegerField('Bathrooms', validators=[DataRequired()])
+    price = IntegerField('Price', validators=[DataRequired()])
     type = SelectField('Type', choices=[('house', 'House'),('apartment','Apartment')], validators=[InputRequired()])
 
     description = TextAreaField('Description', validators=[DataRequired(), Length(min=10, max=1000, message="Write a description of the property.")])
     
-    upload = FileField('photo', validators=[
+    photo = FileField('photo', validators=[
         FileRequired(),
         FileAllowed(['jpg', 'png'], 'Images only!')
     ])
