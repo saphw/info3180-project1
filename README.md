@@ -1,4 +1,4 @@
-# Project 1  Webdev2
+# INFO3180- Project 1  
 A Flask application
 
 
