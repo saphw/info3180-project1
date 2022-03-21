@@ -12,7 +12,7 @@ import os
 from werkzeug.utils import secure_filename
 from app.models import propertyData
 
-
+path = app.config['UPLOAD_FOLDER']
 ###
 # Routing for your application.
 ###
